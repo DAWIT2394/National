@@ -2,8 +2,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const itemRoutes = require('./routes/itemRoutes');
+const waiterRoutes = require('./routes/waiterRoutes');
 const orderRoutes = require('./routes/orderRoutes');
-
 
 const app = express(); 
 app.use(cors());
@@ -13,6 +14,9 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB national connected'))
   .catch(err => console.error(err));
 
+// Routes
+app.use('/api/items', itemRoutes);
+app.use('/api/waiters', waiterRoutes);
 app.use('/api/orders', orderRoutes);
 
 app.listen(process.env.PORT, () => {

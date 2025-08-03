@@ -1,15 +1,11 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-  waiter: { type: String, required: true },
-  items: [{
-    name: String,
-    quantity: Number,
-    price: Number,
-    total: Number
-  }],
-  totalAmount: { type: Number, required: true },
-  date: { type: Date, default: Date.now }
-});
+  meatType: { type: [String] },
+  salesType: { type: String },
+  customerName: { type: String },
+  waiterName: { type: String },
+  kilogram: { type: Number },
+}, { timestamps: true });
 
 module.exports = mongoose.model('Order', orderSchema);
