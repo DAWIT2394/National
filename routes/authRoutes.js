@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { registerUser, loginUser } = require('../controllers/authController');
-const { verifyToken } = require('../middlewares/authMiddleware');
-const { restrictTo } = require('../middlewares/roleMiddleware');
+const authController = require('../controllers/authController');
 
-// Only admin can create user
-router.post('/register', verifyToken, restrictTo('admin'), registerUser);
-router.post('/login', loginUser);
+router.post('/create-admin', authController.createAdmin);     // Only run once
+router.post('/signup', authController.registerUser);          // Admin creates Butcher/Cooker
+router.post('/login', authController.login);                  // All roles login
 
 module.exports = router;
